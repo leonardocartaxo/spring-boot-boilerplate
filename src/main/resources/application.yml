@@ -1,0 +1,44 @@
+management:
+    context-path: /management
+    security:
+        enabled: false
+server:
+    compression:
+        enabled: true
+    error:
+        whitelabel:
+            enabled: false
+    ssl:
+        key-password: 12345678
+        key-store: classpath:fixme-server.jks
+        key-store-password: 12345678
+spring:
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: ${PG_URL:jdbc:postgresql://localhost:5432/spring-boot-boilerplate}
+        username: ${PG_USER:postgres}
+        password: ${PG_PASS:postgres}
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: update
+        show-sql: false
+    main:
+        banner-mode: 'off'
+    mvc:
+        async:
+            request-timeout: 180000
+    profiles:
+        active: development
+
+---
+spring:
+    profiles: development
+server:
+    port: 443
+
+---
+spring:
+    profiles: production
+server:
+    port: 0
